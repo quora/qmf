@@ -1,0 +1,14 @@
+.*
+!/.travis.yml
+!/.clang-format
+!/.gitignore
+/build/
+
+# Compiled Object files
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.a

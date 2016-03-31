@@ -1,0 +1,27 @@
+language: cpp
+
+sudo: false
+
+addons:
+    apt:
+        sources:
+        - llvm-toolchain-precise-3.8
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-5  # needed to get -std=c++-14
+        - curl
+        - liblapack-dev
+
+# gflags and glog cannot be easily installed as packages
+# this approach follows https://reviews.facebook.net/D47037
+install:
+    - pushd /tmp/ && curl -L https://github.com/gflags/gflags/archive/v2.1.2.tar.gz -o gflags.tar.gz && tar xfz gflags.tar.gz && cd gflags-2.1.2 && cmake . && make && popd
+    - pushd /tmp/ && curl -L https://github.com/google/glog/archive/v0.3.4.tar.gz -o glog.tar.gz && tar xfz glog.tar.gz && cd glog-0.3.4 && ./configure && make && popd
+
+before_script:
+    # just setting LD_LIBRARY_PATH doesn't work (-lglog and -lgflags are not found), so we're also setting $LIBRARY_PATH
+    - export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/tmp/gflags-2.1.2/lib:/tmp/glog-0.3.4/.libs"
+    - export LIBRARY_PATH="$LIBRARY_PATH:/tmp/gflags-2.1.2/lib:/tmp/glog-0.3.4/.libs"
+    - export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/tmp/gflags-2.1.2/include:/tmp/glog-0.3.4/src"
+
+script: CXX=g++-5 cmake . && make && make test
