@@ -41,6 +41,7 @@ TEST(BPREngine, init) {
   EXPECT_EQ(engine.itemFactors_->nfactors(), 30);
 
   EXPECT_EQ(engine.data_.size(), dataset.size());
+  EXPECT_EQ(engine.itemMap_.size(), engine.nusers());
 
   // check id indexes and item map
   const size_t uidx = engine.userIndex_.idx(3);
@@ -63,7 +64,7 @@ TEST(BPREngine, init) {
   // training item map shouldn't be affected
   EXPECT_EQ(engine.itemMap_[uidx].size(), 2);
 
-  EXPECT_EQ(engine.testItemMap_.size(), 2);
+  EXPECT_EQ(engine.testItemMap_.size(), engine.nusers());
   EXPECT_EQ(engine.testItemMap_[uidx].size(), 1);
   EXPECT_GT(engine.testItemMap_[uidx].count(engine.itemIndex_.idx(10)), 0);
 

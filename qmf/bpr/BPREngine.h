@@ -87,7 +87,7 @@ class BPREngine : public Engine {
   };
 
   // for storing the set of positive items of a given user
-  using ItemMap = std::unordered_map<size_t, std::unordered_set<size_t>>;
+  using ItemMap = std::vector<std::unordered_set<size_t>>;
 
   // sgd update on an example triplet
   void update(const PosNegTriplet& triplet);

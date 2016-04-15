@@ -73,7 +73,11 @@ void BPREngine::init(const std::vector<DatasetElem>& dataset) {
     const size_t pidx = itemIndex_.getOrSetIdx(elem.itemId);
 
     data_.push_back(PosPair{uidx, pidx});
-    itemMap_[uidx].insert(pidx);
+  }
+
+  itemMap_.resize(userIndex_.size());
+  for (const auto& p : data_) {
+    itemMap_[p.userIdx].insert(p.posItemIdx);
   }
 
   // generate evaluation set
@@ -105,6 +109,7 @@ void BPREngine::initTest(const std::vector<DatasetElem>& testDataset) {
   // populate item map
   std::vector<std::pair<size_t, size_t>> validElems;
   validElems.reserve(testDataset.size());
+  testItemMap_.resize(userIndex_.size());
   for (const auto& elem : testDataset) {
     if (elem.value < 1.0) {
       continue;
