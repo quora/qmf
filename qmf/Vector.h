@@ -39,7 +39,7 @@ class Vector {
   }
 
   Double* const data() {
-    return &data_[0];
+    return data_.data();
   }
 
  private:
