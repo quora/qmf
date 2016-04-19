@@ -84,6 +84,29 @@ In order to compute test ranking metrics (averaged per-user), you can add the fo
 
 In the case of BPR, a dataset of (user, positive item, negative item) triplets is sampled during initialization for both training and test sets (with a fixed seed, or as given by `--eval_seed`), and is used to evaluate an estimated loss after each epoch.
 
+Options for WALS:
+* `--nepochs` (default 10): number of iterations of alternating least squares
+* `--nfactors` (default 30): dimensionality of the learned user and item factors
+* `--regularization_lambda`: regularization coefficient
+* `--confidence_weight`: weight multiplier for positive items (alpha in the paper [1])
+* `--init_distribution_bound` (default 0.01): bound (in absolute value) on weight initialization (with the default, weights are initialized uniformly between -0.01 and 0.01)
+
+Options for BPR:
+* `--nepochs` (default 10): number of iterations of alternating least squares
+* `--nfactors` (default 30): dimensionality of the learned user and item factors
+* `--use_biases` (default false): whether to use additive item biases
+* `--user_lambda`: regularization coefficient on user factors
+* `--item_lambda`: regularization coefficient on item factors
+* `--bias_lambda`: regularization coefficient on biases
+* `--init_learning_rate`: initial learning rate
+* `--decay_rate` (default 0.9): multiplicative decay applied to the learning rate after each epoch
+* `--init_distribution_bound` (default 0.01): bound (in absolute value) on weight initialization (with the default, weights are initialized uniformly between -0.01 and 0.01)
+* `--num_negative_samples` (default 3): number of random negatives sampled for each positive item
+* `--num_hogwild_threads`: number of parallel hogwild threads to use for SGD (in contrast, `--nthreads` determines parallelism for deterministic operations, e.g. for evaluation)
+* `--eval_num_neg` (default 3): number of random negatives per positive used to generate the fixed evaluation sets mentioned above
+
+For more details on the command-line options, see the definitions in `wals.cpp` and `bpr.cpp`.
+
 ## Credits
 
 This library was built at Quora by [Denis Yarats](https://github.com/1nadequacy) and [Alberto Bietti](https://github.com/albietz).
@@ -93,8 +116,8 @@ QMF is released under the [Apache 2.0 Licence](https://github.com/quora/qmf/blob
 
 ## References
 
-[1] Koren et al. “Collaborative Filtering for Implicit Feedback Datasets”.  ICDM 2008.
+[1] Hu, Koren and Volinsky. Collaborative Filtering for Implicit Feedback Datasets. In *ICDM* 2008.
 
-[2] Rendle et al. “BPR: Bayesian Personalized Ranking from Implicit Feedback”. UAI 2009.
+[2] Rendle, Freudenthaler, Gantner and Schmidt-Thieme. BPR: Bayesian Personalized Ranking from Implicit Feedback. In *UAI* 2009.
 
-[3] Recht et al. "Hogwild!: A Lock-Free Approach to Parallelizing Stochastic Gradient Descent". NIPS 2011.
+[3] Niu, Recht, Ré and Wright. Hogwild!: A Lock-Free Approach to Parallelizing Stochastic Gradient Descent. In *NIPS* 2011.
