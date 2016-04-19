@@ -35,13 +35,13 @@ DEFINE_double(decay_rate, 0.9, "decay rate on learning rate");
 DEFINE_bool(use_biases, false, "use bias term");
 DEFINE_double(init_distribution_bound, 0.01, "init distirbution bound");
 DEFINE_uint64(num_negative_samples, 3, "number of negative items to sample for each positive item");
-DEFINE_uint64(num_hogwild_threads, 12, "number of parallel threads for hogwild");
+DEFINE_uint64(num_hogwild_threads, 1, "number of parallel threads for hogwild");
 DEFINE_bool(shuffle_training_set, true, "shuffle training set after each epoch");
 
 // settings
 DEFINE_uint64(eval_num_neg, 3, "number of negatives generated per positive in evaluation");
 DEFINE_int32(eval_seed, 42, "random seed for generating evaluation set and test users");
-DEFINE_uint64(nthreads, 32, "number of threads for parallel execution");
+DEFINE_uint64(nthreads, 16, "number of threads for parallel execution");
 
 // datasets
 DEFINE_string(train_dataset, "", "filename of training dataset");

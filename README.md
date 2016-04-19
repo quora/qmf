@@ -102,7 +102,7 @@ Options for BPR:
 * `--decay_rate` (default 0.9): multiplicative decay applied to the learning rate after each epoch
 * `--init_distribution_bound` (default 0.01): bound (in absolute value) on weight initialization (with the default, weights are initialized uniformly between -0.01 and 0.01)
 * `--num_negative_samples` (default 3): number of random negatives sampled for each positive item
-* `--num_hogwild_threads`: number of parallel hogwild threads to use for SGD (in contrast, `--nthreads` determines parallelism for deterministic operations, e.g. for evaluation)
+* `--num_hogwild_threads` (default 1): number of parallel hogwild threads to use for SGD (in contrast, `--nthreads` determines parallelism for deterministic operations, e.g. for evaluation)
 * `--eval_num_neg` (default 3): number of random negatives per positive used to generate the fixed evaluation sets mentioned above
 
 For more details on the command-line options, see the definitions in `wals.cpp` and `bpr.cpp`.
