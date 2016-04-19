@@ -12,6 +12,8 @@ QMF is a fast and scalable C++ library for implicit-feedback matrix factorizatio
 
 For evaluation, QMF supports various ranking-based metrics that are computed per-user on test data, in addition to training or test objective values.
 
+For more information, see our blog post about QMF here: https://engineering.quora.com/Open-sourcing-QMF-for-matrix-factorization.
+
 ## Building QMF
 
 QMF requires gcc 4.9+, as it uses the C++14 standard, and CMake version 2.8+. It also depends on glog, gflags and lapack libraries.
