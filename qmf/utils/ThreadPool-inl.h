@@ -23,7 +23,6 @@ namespace qmf {
 template <typename FuncT, typename... Args>
 auto ThreadPool::addTask(FuncT&& func, Args&&... args)
   -> std::future<typename std::result_of<FuncT(Args...)>::type> {
-  CHECK(!poison_) << "destructor was called";
 
   using ResultT = typename std::result_of<FuncT(Args...)>::type;
 
@@ -31,6 +30,7 @@ auto ThreadPool::addTask(FuncT&& func, Args&&... args)
     std::bind(std::forward<FuncT>(func), std::forward<Args>(args)...));
   auto result = package->get_future();
   WITH_LOCK(mutex_) {
+    CHECK(!poison_) << "destructor was called";
     tasks_.emplace([package]{ (*package)(); });
   }
   cond_.notify_one();

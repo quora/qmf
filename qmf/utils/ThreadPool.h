@@ -16,7 +16,6 @@
 
 #pragma once
 
-#include <atomic>
 #include <future>
 #include <memory>
 #include <mutex>
@@ -64,7 +63,7 @@ class ThreadPool {
 
   std::mutex mutex_;
 
-  std::atomic_bool poison_;
+  bool poison_;
 
   std::condition_variable cond_;
 };

@@ -26,7 +26,9 @@ ThreadPool::ThreadPool(const size_t nthreads) : poison_(false) {
 }
 
 ThreadPool::~ThreadPool() {
-  poison_.exchange(true);
+  WITH_LOCK(mutex_) {
+    poison_ = true;
+  }
   cond_.notify_all();
   for (auto& thread : threads_) {
     thread.join();
