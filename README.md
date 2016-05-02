@@ -16,7 +16,7 @@ For more information, see our blog post about QMF here: https://engineering.quor
 
 ## Building QMF
 
-QMF requires gcc 4.9+, as it uses the C++14 standard, and CMake version 2.8+. It also depends on glog, gflags and lapack libraries.
+QMF requires gcc 5.0+, as it uses the C++14 standard, and CMake version 2.8+. It also depends on glog, gflags and lapack libraries.
 
 ### Ubuntu
 
