@@ -75,7 +75,7 @@ TEST(Matrix, transpose) {
   qmf::Matrix X(nrows, ncols);
   for (size_t i = 0; i < nrows; ++i) {
     for (size_t j = 0; j < ncols; ++j) {
-      X(i, j) = i * j;
+      X(i, j) = rand();
     }
   }
 
