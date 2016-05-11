@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <algorithm>
 #include <random>
 
 #include <qmf/wals/WALSEngine.h>
