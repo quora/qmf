@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <algorithm>
+#include <numeric>
 
 #include <qmf/utils/ThreadPool.h>
 
