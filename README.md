@@ -45,6 +45,7 @@ Here's a basic example of usage:
 # to train a WALS model
 ./wals \
     --train_dataset=<train_dataset> \
+    --test_dataset=<test_dataset> \
     --user_factors=<user_factors_file> \
     --item_factors=<item_factors_file> \
     --regularization_lambda=0.05 \
@@ -84,7 +85,7 @@ In order to compute test ranking metrics (averaged per-user), you can add the fo
 * `--num_test_users=<nusers>` specifies the number of users to consider when computing test metrics (by default 0 = all users). Computing these metrics requires computing predicted scores for all items and test users, which can be slow as the number of user gets big. The users are picked uniformely at random with a fixed seed (which can be specified with `--eval_seed`)
 * `--test_always` will compute these metrics after each epoch (by default they're computed only after the last epoch)
 
-In the case of BPR, a dataset of (user, positive item, negative item) triplets is sampled during initialization for both training and test sets (with a fixed seed, or as given by `--eval_seed`), and is used to evaluate an estimated loss after each epoch.
+In the case of BPR, a set of (user, positive item, negative item) triplets is sampled during initialization for both training and test sets (with a fixed seed, or as given by `--eval_seed`), and is used to compute an estimate of the loss after each epoch. This has no effect on training or on the computation of ranking metrics.
 
 Options for WALS:
 * `--nepochs` (default 10): number of iterations of alternating least squares
@@ -105,7 +106,7 @@ Options for BPR:
 * `--init_distribution_bound` (default 0.01): bound (in absolute value) on weight initialization (with the default, weights are initialized uniformly between -0.01 and 0.01)
 * `--num_negative_samples` (default 3): number of random negatives sampled for each positive item
 * `--num_hogwild_threads` (default 1): number of parallel hogwild threads to use for SGD (in contrast, `--nthreads` determines parallelism for deterministic operations, e.g. for evaluation)
-* `--eval_num_neg` (default 3): number of random negatives per positive used to generate the fixed evaluation sets mentioned above
+* `--eval_num_neg` (default 3): number of random negatives per positive used to generate the fixed evaluation sets mentioned above (used for computing train/test loss, does not affect training or ranking metrics)
 
 For more details on the command-line options, see the definitions in `wals.cpp` and `bpr.cpp`.
 
