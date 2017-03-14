@@ -186,6 +186,21 @@ TEST(WALSEngine, updateFactorsForOne) {
       EXPECT_NEAR(X(i, j), 0.0, 1e-8);
     }
   }
-  EXPECT_NEAR(loss, 11.188, 1e-2);
+
+  Double trueLoss = 0.0;
+  for (size_t i = 0; i < nusers; ++i) {
+    for (size_t j = 0; j < nitems; ++j) {
+      Double pred = 0.0;
+      for (size_t k = 0; k < nfactors; ++k) {
+        pred += X(i, k) * Y(j, k);
+      }
+      if (i == 0) { // both items liked for this user
+        trueLoss += 2.0 * (1.0 - pred) * (1.0 - pred);
+      } else {
+        trueLoss += (0.0 - pred) * (0.0 - pred);
+      }
+    }
+  }
+  EXPECT_NEAR(loss, trueLoss, 1e-2);
 }
 }
