@@ -226,9 +226,9 @@ Double WALSEngine::updateFactorsForOne(Matrix& X,
       for (size_t j = 0; j < n; ++j) {
         A(i, j) += Y(rightIdx, i) * alpha * signal.value * Y(rightIdx, j);
       }
-      // for term p^t * C * p
-      loss += 1.0 + alpha * signal.value;
     }
+    // for term p^t * C * p
+    loss += 1.0 + alpha * signal.value;
   }
   // B = Y^t * C * Y
   Matrix B = A;
