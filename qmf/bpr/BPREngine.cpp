@@ -17,6 +17,7 @@
 #include <qmf/bpr/BPREngine.h>
 
 #include <algorithm>
+#include <cmath>
 
 namespace qmf {
 
@@ -180,6 +181,8 @@ void BPREngine::update(const PosNegTriplet& triplet) {
   const size_t nidx = triplet.negItemIdx;
 
   const Double e = lossDerivative(predictDifference(uidx, pidx, nidx));
+  CHECK(std::isfinite(e)) << "gradients too big, try decreasing the learning "
+                             "rate (--init_learning_rate)";
   const Double lr = learningRate_;
 
   // update biases
