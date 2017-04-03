@@ -87,6 +87,8 @@ TEST(BPREngine, optimize) {
   config.decayRate = 1.0;
   config.initDistributionBound = 0.1;
   config.numNegativeSamples = 1;
+  config.numHogwildThreads = 2;
+  config.useBiases = false;
 
   int totalChecks = 0;
   int successChecks = 0;
