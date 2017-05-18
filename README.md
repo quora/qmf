@@ -95,7 +95,7 @@ Options for WALS:
 * `--init_distribution_bound` (default 0.01): bound (in absolute value) on weight initialization (with the default, weights are initialized uniformly between -0.01 and 0.01)
 
 Options for BPR:
-* `--nepochs` (default 10): number of iterations of alternating least squares
+* `--nepochs` (default 10): number of iterations of SGD
 * `--nfactors` (default 30): dimensionality of the learned user and item factors
 * `--use_biases` (default false): whether to use additive item biases
 * `--user_lambda`: regularization coefficient on user factors
