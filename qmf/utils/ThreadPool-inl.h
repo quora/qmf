@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+#if __GNUC__ >= 3
+ #include <functional>
+#endif
+
 #include <condition_variable>
 
 #include <glog/logging.h>
