@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <functional>
 #include <condition_variable>
 
 #include <glog/logging.h>
