@@ -19,6 +19,10 @@
 #include <limits>
 #include <vector>
 #include <unordered_map>
+#include <cstddef>
+#include <cstdint>
+using std::size_t;
+using std::int64_t;
 
 namespace qmf {
 
