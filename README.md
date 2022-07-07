@@ -22,7 +22,7 @@ QMF requires gcc 5.0+, as it uses the C++14 standard, and CMake version 2.8+. It
 
 To install libraries dependencies:
 ```
-sudo apt-get install libgoogle-glog-dev libgflags-dev liblapack-dev
+sudo apt-get install liblapack-dev
 ```
 
 To build the binaries:

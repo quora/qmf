@@ -49,8 +49,8 @@ DEFINE_string(user_factors, "", "filename of user factors");
 DEFINE_string(item_factors, "", "filename of item factors");
 
 int main(int argc, char** argv) {
-  google::SetUsageMessage("wals");
-  google::ParseCommandLineFlags(&argc, &argv, true);
+  gflags::SetUsageMessage("wals");
+  gflags::ParseCommandLineFlags(&argc, &argv, true);
   google::InitGoogleLogging(argv[0]);
   // make glog to log to stderr
   FLAGS_logtostderr = 1;
