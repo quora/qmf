@@ -21,6 +21,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
 set(CMAKE_FILES_DIRECTORY "build/")
 
 # includes
+include(FetchContent)
 include_directories(SYSTEM ${PROJECT_SOURCE_DIR})
 include_directories(SYSTEM ${PROJECT_SOURCE_DIR}/qmf/third-party/gtest-1.7.0/fused-src)
 
@@ -41,6 +42,26 @@ set(SOURCES
     ${PROJECT_SOURCE_DIR}/qmf/utils/ThreadPool.cpp
     ${PROJECT_SOURCE_DIR}/qmf/utils/Util.cpp
 )
+
+set(FETCHCONTENT_QUIET FALSE)
+
+FetchContent_Declare(
+  glog  
+  GIT_REPOSITORY https://github.com/google/glog.git 
+  GIT_TAG v0.4.0 
+  GIT_PROGRESS TRUE
+)
+FetchContent_Declare(glog)
+FetchContent_MakeAvailable(glog)
+
+FetchContent_Declare(
+  gflags  
+  GIT_REPOSITORY https://github.com/gflags/gflags.git 
+  GIT_TAG v2.2.2
+  GIT_PROGRESS TRUE
+)
+FetchContent_Declare(gflags)
+FetchContent_MakeAvailable(gflags)
 
 add_library(qmf STATIC ${SOURCES})
 target_link_libraries(qmf glog gflags lapack)
